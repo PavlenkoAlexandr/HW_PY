@@ -13,6 +13,7 @@ def log_path_decor(path: str):
                     f'Выполнена функция {old_func.__name__} с аргументами {args, kwargs}\n'
                     f'Результат выполнения функции:\n{old_func(*args, **kwargs)}'
                 )
+            return old_func(*args, **kwargs)
         return new_func
     return log_decor
 
