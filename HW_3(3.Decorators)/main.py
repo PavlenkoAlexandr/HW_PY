@@ -7,13 +7,14 @@ import os
 def log_path_decor(path: str):
     def log_decor(old_func: Callable):
         def new_func(*args, **kwargs):
+            result = old_func(*args, **kwargs)
             with open(os.path.join(path, 'log.txt'), 'w', encoding='utf-8') as f:
                 f.write(
                     f'{datetime.now()}\n'
                     f'Выполнена функция {old_func.__name__} с аргументами {args, kwargs}\n'
-                    f'Результат выполнения функции:\n{old_func(*args, **kwargs)}'
+                    f'Результат выполнения функции:\n{result}'
                 )
-            return old_func(*args, **kwargs)
+            return result
         return new_func
     return log_decor
 
